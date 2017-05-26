@@ -19,6 +19,7 @@
   "homepage": "https://github.com/hartbeatnt/aframetonejs#readme",
   "dependencies": {
     "aframe": "^0.5.0",
+    "note-parser": "^2.0.1",
     "tone": "^0.10.0"
   },
   "devDependencies": {

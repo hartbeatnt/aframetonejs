@@ -1,2 +1,3 @@
 import './mouse-controls';
-import './click-tone'
+import './click-tone';
+import './piano-keys';

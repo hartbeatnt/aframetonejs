@@ -12,7 +12,7 @@ AFRAME.registerComponent('mouse-controls', {
       this.domEl.addEventListener('mouseup', e => this.onMouseUp(e));
       this.domEl.addEventListener('click', e => this.onClick(e));
       this.domEl.addEventListener('dblclick', e => this.onDblClick(e));
-      this.domEl.addEventListener('scroll', e => this.onScroll(e));
+      this.domEl.addEventListener('auxclick', e => this.onAuxClick(e));
       this.domEl.addEventListener('wheel', e => this.onWheel(e));
       this.intersects = [];
       this.prevIntersects = [];
@@ -67,22 +67,22 @@ AFRAME.registerComponent('mouse-controls', {
     // this.prevIntersects = this.intersects
   },
   onMouseDown: function(e){
-    
+    this.intersects[0] && this.intersects[0].object.el.emit('mousedown');
   },
   onMouseUp: function(e){
-
+    this.intersects[0] && this.intersects[0].object.el.emit('mouseup');
   },
   onClick: function(e){
     this.intersects[0] && this.intersects[0].object.el.emit('click');
   },
   onDblClick: function(e){
-
+    this.intersects[0] && this.intersects[0].object.el.emit('dblclick');
   },
-  onScroll: function(e){
-
+  onAuxClick: function(e){
+    this.intersects[0] && this.intersects[0].object.el.emit('auxclick');
   },
   onWheel: function(e){
-
+    this.intersects[0] && this.intersects[0].object.el.emit('wheel');
   },
   update: function () {},
   tick: function () {},

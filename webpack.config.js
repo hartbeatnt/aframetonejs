@@ -13,13 +13,17 @@ module.exports = {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
       {
+        test: /\.html$/,
+        loader: "raw-loader"
+    	},
+      {
         test: /.jsx?$/,
         loader: 'babel-loader',
         include: path.resolve(__dirname, "dev"),
         query: {
           presets: ['es2015', 'stage-0']
         }
-      }
+      },
     ]
   },
   devtool: 'source-map',

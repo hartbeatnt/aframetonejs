@@ -1,4 +1,4 @@
 import '../index.html';
 import AFRAME from 'aframe';
-import TONE from 'tone';
+import Tone from 'tone';
 import './components'

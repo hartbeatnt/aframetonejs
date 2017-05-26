@@ -1,1 +1,2 @@
-import './click-controls';
+import './mouse-controls';
+import './click-tone'

@@ -24,7 +24,7 @@ AFRAME.registerComponent('piano-key', {
       height,
       depth
     })
-    this.el.setAttribute('click-tone','freq',this.data.note)
+    this.el.setAttribute('new-tone','freq',this.data.note)
   },
   update: function () {},
   tick: function () {},

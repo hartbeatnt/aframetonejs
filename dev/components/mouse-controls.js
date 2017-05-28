@@ -23,10 +23,16 @@ AFRAME.registerComponent('mouse-controls', {
       (e.offsetX / this.domEl.clientWidth)  *  2 - 1,
       (e.offsetY / this.domEl.clientHeight) * -2 + 1 
     );
+    // TODO: optimize this. its hecka inefficient rn.
+    const traverse = scene => {
+      let entities = [];
+      scene.traverse(node=>{
+        node.type === "Mesh" && entities.push(node)
+      })
+      return entities;
+    }
     this.raycaster.setFromCamera(mouse, this.scene.camera);
-    this.intersects = this.raycaster.intersectObjects(this.scene.object3D.children.map(el=>{
-      return el.children[0]
-    }));
+    this.intersects = this.raycaster.intersectObjects(traverse(this.scene.object3D));    
     let prev = this.prevIntersects;
     // this.intersects.forEach((intersect, i) => {
     //   let el = intersect.object.el;

@@ -1,6 +1,6 @@
 const DEFAULT_INDEX = 3;
 
-AFRAME.registerComponent('piano-keys', {
+AFRAME.registerComponent('piano-keyboard', {
   schema: {
     start: { type: 'string', default: 'C4' },
     notes: { type: 'int', default: 12 },
@@ -9,6 +9,9 @@ AFRAME.registerComponent('piano-keys', {
   init: function () {
     let startNote = this.parseNote(this.data.start);
     this.notes = this.getNoteRange(startNote, this.data.notes);
+    this.notes.forEach(note=>{
+      this.createPianoKey(note)
+    })
   },
 
   parseNote: function(str){
@@ -37,10 +40,19 @@ AFRAME.registerComponent('piano-keys', {
       let note = scale[noteIndex]+octave;
       notes.push({
         note,
-        midi: j - i,
+        index: j - i,
       });
     }
     return notes;
+  },
+
+  createPianoKey(key) {
+    let color = key.note[1]==='#'
+      ? 'black'
+      : 'white';
+    console.log(key)
+    console.log(color)
+    // let key = document.createElement()
   },
 
   update: function () {},

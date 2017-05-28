@@ -38,8 +38,6 @@ AFRAME.registerComponent('mouse-controls', {
       let el = intersect.object.el;
       if (!el) return;
       if ( !prev || prev.object !== intersect.object ) {
-        console.log('enter')
-        console.log(intersect.object)
         el.emit('mouseenter')
       } 
       else {

@@ -7,7 +7,7 @@ AFRAME.registerComponent('click-tone', {
   init: function () {
     this.freq = +this.data.freq || this.data.freq
     this.synth = new Tone.Synth().toMaster();
-    this.el.onclick = ()=>{
+    this.el.onclick = () => {
       console.log(this.freq)
       this.synth.triggerAttackRelease(this.freq, '8n');
     }

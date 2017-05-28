@@ -9,13 +9,13 @@ AFRAME.registerComponent('piano-key', {
       var color = 'black';
       var width = 0.75;
       var height = 1.5;
-      var depth = 2;
+      var depth = 3;
     }
     else {
       var color = 'white';
       var width = 0.9;
       var height = 1.0;
-      var depth = 5.0;
+      var depth = 4.5;
     }
     this.el.setAttribute('material', 'color', color); 
     this.el.setAttribute('geometry', {

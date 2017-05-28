@@ -59,7 +59,9 @@ AFRAME.registerComponent('piano-keyboard', {
       y: note.note[1] !== "#"
         ? 0
         : 0.25,
-      z:0
+      z: note.note[1] !== "#"
+        ? 0
+        : -0.75,
     })
     this.el.appendChild(key)
   },

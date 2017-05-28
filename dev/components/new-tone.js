@@ -7,27 +7,29 @@ AFRAME.registerComponent('new-tone', {
   init: function () {
     this.freq = +this.data.freq || this.data.freq
     this.synth = new Tone.Synth({
-	  oscillator : {
-      type : 'fmsquare',
-      modulationType : 'sawtooth',
-      modulationIndex : 3,
-      harmonicity: 3.4
-    },
-    envelope : {
-  	attack : 0.001,
-    decay : 0.1,
-    sustain: 0.1,
-    release: 0.1
-  }
-	}).toMaster();
-    this.el.onmousedown = ()=>{
-      console.log(this.freq)
-      this.synth.triggerAttack(this.freq);
+      oscillator : {
+        type : 'fmsquare',
+        modulationType : 'sawtooth',
+        modulationIndex : 3,
+        harmonicity: 3.4
+      },
+      envelope : {
+      attack : 0.001,
+      decay : 0.1,
+      sustain: 0.1,
+      release: 0.1
     }
-	this.el.onmouseup = ()=>{
-	  console.log(this.freq)
-	  this.synth.triggerRelease();
-	}
+    }).toMaster();
+    this.el.onmousedown = ()=>{
+      this.synth.triggerAttack(this.freq);
+
+    }
+    this.el.onmouseup = ()=>{
+      this.synth.triggerRelease();
+    };
+    this.el.onmouseleave = ()=>{
+      this.synth.triggerRelease();
+    }
   },
   update: function () {},
   tick: function () {},

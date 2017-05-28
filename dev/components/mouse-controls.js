@@ -34,43 +34,30 @@ AFRAME.registerComponent('mouse-controls', {
     this.raycaster.setFromCamera(mouse, this.scene.camera);
     this.intersects = this.raycaster.intersectObjects(traverse(this.scene.object3D));    
     let prev = this.prevIntersects;
-    // this.intersects.forEach((intersect, i) => {
-    //   let el = intersect.object.el;
-    //   if (!el) return;
-    //   let comps = el.components;
-    //   return i === 0
-    //     ? (
-    //         comps.onMouseEnter 
-    //           && ( !prev[0] || prev[0].object !== intersect.object ) 
-    //           && comps.onMouseEnter(),
-    //         comps.onMouseOver 
-    //           && comps.onMouseOver()
-    //       )
-    //     : (
-    //         comps.onHidMouseEnter 
-    //           && !prev.map(()=>{
-    //             return intersect.object
-    //           }).includes(intersect.object) 
-    //           && comps.onHidMouseEnter(),
-    //         comps.onHidMouseOver 
-    //           && comps.onHidMouseOver()
-    //       )
-    // })
-    // prev.forEach((intersect, i) => {
-    //   const ent = intersect.object.UNI;
-    //   if (!ent) return;
-    //   let comps = ent.components;
-    //   return i === 0
-    //     ? comps.onMouseExit 
-    //         && ( !this.intersects[0] || this.intersects[0].object !== intersect.object ) 
-    //         && comps.onMouseExit()
-    //     : comps.onHidMouseExit 
-    //         && !this.intersects.map((newIntersect)=>{
-    //           return newIntersect.object
-    //         }).includes(intersect.object) 
-    //         && comps.onHidMouseExit()
-    // })
-    // this.prevIntersects = this.intersects
+    this.intersects.forEach(intersect => {
+      let el = intersect.object.el;
+      if (!el) return;
+      if ( !prev || prev.object !== intersect.object ) {
+        console.log('enter')
+        console.log(intersect.object)
+        el.emit('mouseenter')
+      } 
+      else {
+        el.emit('mouseover')
+      }
+    })
+
+    prev.forEach(intersect => {
+      let el = intersect.object.el;
+      if (!el) return;
+      if ( !this.intersects[0] || this.intersects[0].object.el !== intersect.object.el ) {
+        el.emit('mouseleave')
+      } 
+      else {
+        el.emit('mouseover')
+      }
+    })
+    this.prevIntersects = this.intersects
   },
   onMouseDown: function(e){
     this.intersects[0] && this.intersects[0].object.el.emit('mousedown');

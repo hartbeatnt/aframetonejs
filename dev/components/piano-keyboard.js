@@ -37,32 +37,26 @@ AFRAME.registerComponent('piano-keyboard', {
       let noteIndex = j % (scale.length);
       let octave = start.octave + Math.floor(j/(scale.length));
       let note = scale[noteIndex]+octave;
-      if (note[1] !== '#') xPos ++;
+      let position = {};
+      if (note[1] !== '#') {
+        xPos ++;
+        position = { x: xPos, y: 0, z: 0 }
+      } else {
+        position = { x: xPos + 0.5, y: 0.25, z: -0.75 }
+      }
       notes.push({
         note,
-        xPos: note[1] !== '#'
-          ? xPos
-          : xPos + 0.5,
+        position,
         index: j - i,
       });
     }
-    console.log(notes)
     return notes;
   },
 
   createPianoKey(note) {
-    console.log(note)
     let key = document.createElement('a-box');
     key.setAttribute('piano-key', {note:note.note})
-    key.setAttribute('position', {
-      x: note.xPos,
-      y: note.note[1] !== "#"
-        ? 0
-        : 0.25,
-      z: note.note[1] !== "#"
-        ? 0
-        : -0.75,
-    })
+    key.setAttribute('position', note.position)
     this.el.appendChild(key)
   },
 

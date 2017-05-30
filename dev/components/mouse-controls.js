@@ -58,6 +58,7 @@ AFRAME.registerComponent('mouse-controls', {
     this.prevIntersects = this.intersects
   },
   onMouseDown: function(e){
+    this.intersects[0] && console.log(this.intersects[0].object)
     this.intersects[0] && this.intersects[0].object.el.emit('mousedown');
   },
   onMouseUp: function(e){

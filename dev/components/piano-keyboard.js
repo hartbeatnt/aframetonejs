@@ -5,6 +5,24 @@ AFRAME.registerComponent('piano-keyboard', {
   },
 
   init: function () {
+    this.el.voices = this.el.voices || [];
+    this.createKeyboard();
+  },
+
+  triggerAttack: function(note) {
+    this.el.voices.forEach(voice=>{
+      console.log('note getting passed to voices',note)
+      voice.triggerAttack(note)
+    })
+  },
+
+  triggerRelease: function() {
+    this.el.voices.forEach(voice=>{
+      voice.triggerRelease()
+    })
+  },
+
+  createKeyboard: function() {
     let startNote = this.parseNote(this.data.start);
     this.notes = this.getNoteRange(startNote, this.data.notes);
     let i = 0;

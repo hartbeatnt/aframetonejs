@@ -23,8 +23,18 @@ AFRAME.registerComponent('piano-key', {
       width,
       height,
       depth
-    })
-    this.el.setAttribute('new-tone','freq',this.data.note)
+    });
+    this.keyboard = this.el.parentEl.components['piano-keyboard'];
+    this.el.onmousedown = () => {
+      this.keyboard.triggerAttack(this.data.note);
+    };
+    this.el.onmouseup = () => {
+      this.keyboard.triggerRelease(this.data.note);
+    };
+    this.el.onmouseleave = () => {
+      this.keyboard.triggerRelease(this.data.note);
+    };
+    this.el.setAttribute('new-tone','freq', this.data.note)
   },
   update: function () {},
   tick: function () {},

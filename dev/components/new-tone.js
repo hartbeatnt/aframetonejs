@@ -5,6 +5,8 @@ AFRAME.registerComponent('new-tone', {
     freq: {type: 'string', default: '440'}
   },
   init: function () {
+    this.el.voices = this.el.voices || [];
+    this.el.voices.push(this);
     this.freq = +this.data.freq || this.data.freq
     this.synth = new Tone.Synth({
       oscillator : {
@@ -14,22 +16,18 @@ AFRAME.registerComponent('new-tone', {
         harmonicity: 3.4
       },
       envelope : {
-      attack : 0.001,
-      decay : 0.1,
-      sustain: 0.1,
-      release: 0.1
-    }
+        attack : 0.001,
+        decay : 0.1,
+        sustain: 0.1,
+        release: 0.1
+      }
     }).toMaster();
-    this.el.onmousedown = ()=>{
-      this.synth.triggerAttack(this.freq);
-
-    }
-    this.el.onmouseup = ()=>{
-      this.synth.triggerRelease();
-    };
-    this.el.onmouseleave = ()=>{
-      this.synth.triggerRelease();
-    }
+  },
+  triggerAttack(freq) {
+    this.synth.triggerAttack(freq)
+  },
+  triggerRelease(freq) {
+    this.synth.triggerRelease(freq)
   },
   update: function () {},
   tick: function () {},
